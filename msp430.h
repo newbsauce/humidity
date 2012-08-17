@@ -26,7 +26,7 @@
 void delay_ms(uint16_t ms);
 void msp430_clk_setup();
 void msp430_spi_setup();
-void spi_sends(uint8_t *texts, uint8_t length,  uint8_t chip_select);
+void spi_sends(uint8_t *texts, uint8_t length);
 void mps430_uart_setup();
 void uart_sends(char *texts);
 void msp430_port_setup();

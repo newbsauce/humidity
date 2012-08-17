@@ -47,23 +47,24 @@ void msp430_spi_setup()
 
 }
 
-void spi_sends(uint8_t * texts, uint8_t length,  uint8_t chip_select)
+void spi_sends(uint8_t * texts, uint8_t length)
 {
 uint8_t i=0;
 
 //P1OUT &= ~chip_select;
-P2OUT &= ~chip_select;
+//P2OUT &= ~chip_select;
 
 
 for(i = 0; i<length; i++)
 	{
 	UCB0TXBUF = texts[i]; // write INT to TX buffer
 	while (!(IFG2 & UCB0TXIFG));
+	_delay_cycles(300);
 	}
 
 while ((UCB0STAT & UCBUSY));
 
-P1OUT |= chip_select;
+//P1OUT |= chip_select;
 
 }
 
@@ -100,7 +101,7 @@ void uart_sends(char *texts)
 
 			i++; // increase string index
 
-			__delay_cycles(2500); //transmission delay
+			__delay_cycles(1000); //transmission delay
 
 			if (i >40) //prevent infinite transmit
 					{
@@ -110,9 +111,6 @@ void uart_sends(char *texts)
 
 			if (message[i] == 0) // If end of input string is reached, break loop.
 					{
-				__delay_cycles(500);
-				UCA0TXBUF = 0;
-				__delay_cycles(2500);
 				break;
 			}
 

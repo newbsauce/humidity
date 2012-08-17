@@ -14,7 +14,8 @@
 #define CLOCKPIN BIT5
 #define ENABLEPIN BIT3
 #define test_line() sendInstruction((0x80 | 0xB | 0x40)); _delay_cycles(2000)
-
+#define second_line_p() sendInstruction((0x80 | 0x40 | 0x8)); _delay_cycles(2000)
+#define first_line_p() sendInstruction((0x80 | 0x6)); _delay_cycles(2000)
 
 void sendDataArray(char data[], char length);
 void send(char data, char registerSelect);
